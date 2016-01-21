@@ -61,37 +61,25 @@ def show_melon(melon_id):
 def shopping_cart():
     """Display content of shopping cart."""
 
-    melon_id_list = session['cart']
-
     melon_list = []
-    
-    total_melon_type = 0
 
-    for m_id in melon_id_list:
-        melon = melons.get_by_id(m_id)
-        print melon
-        melon_list.append(melon)
+    total_cost = 0
 
-    melon_quantity = {}
+    if "cart" in session:
+        melon_id_list = session['cart']
+        melon_cost = 0
 
-    for m_id in melon_id_list:
-        if melon_quantity.get(m_id):
-            melon_quantity[m_id] = melon_quantity.get(m_id, 0) + 1
-        else:
-            melon_quantity[m_id] = 1
+        for m_id in melon_id_list:
+            melon = melons.get_by_id(m_id)
+            melon_cost += melon.price
+            print melon
+            melon_list.append(melon)
 
-    # TODO: Display the contents of the shopping cart.
 
-    # The logic here will be something like:
-    #
-    # - get the list-of-ids-of-melons from the session cart
-    # - loop over this list:
-    #   - keep track of information about melon types in the cart
-    #   - keep track of the total amt ordered for a melon-type
-    #   - keep track of the total amt of the entire order
-    # - hand to the template the total order cost and the list of melon types
+        total_cost = melon_cost 
 
-    return render_template("cart.html", melon_list = melon_list)
+    return render_template("cart.html", melon_list=melon_list, 
+                                        total_cost=total_cost)
 
 
 @app.route("/add_to_cart/<int:id>")
