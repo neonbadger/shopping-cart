@@ -75,8 +75,21 @@ def shopping_cart():
             print melon
             melon_list.append(melon)
 
+        total_cost = melon_cost
 
-        total_cost = melon_cost 
+    melon_order = {}
+
+    for melon in melon_list:
+        melon_order[melon] = {
+                                "price": melon.price,
+                                "quantity": melon_order[melon].get("quantity", 0) + 1,
+                                "sub_total": melon_order[melon]["price"] * melon_order[melon]["quantity"],
+        }
+
+
+    print melon_order
+
+        # total_cost = melon_cost 
 
     return render_template("cart.html", melon_list=melon_list, 
                                         total_cost=total_cost)
