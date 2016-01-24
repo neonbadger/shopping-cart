@@ -85,12 +85,10 @@ def get_by_id(id):
     """Return a melon, given its ID."""
 
     # This relies on access to the global dictionary `melon_types`
+    # Dictionary to hold types of melons.
+    # Format is {id: Melon object, ... }
 
     return melon_types[id]
 
-
-# Dictionary to hold types of melons.
-#
-# Format is {id: Melon object, ... }
 
 melon_types = read_melon_types_from_file("melons.txt")

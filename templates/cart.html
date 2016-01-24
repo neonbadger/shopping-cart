@@ -14,13 +14,13 @@
         </thead>
         <tbody>
 
-        {% for melon in melon_list %}
+        {% for melon in melon_order %}
 
         <tr>
-            <td>{{ melon.common_name }} </td>
-            <td> 1 </td>
-            <td>{{ melon.price }}</td>
-            <td>${{ melon.price}} </td>
+            <td>{{ melon["name"] }} </td>
+            <td> {{melon["quantity"]}} </td>
+            <td>{{ melon["price"] }}</td>
+            <td>${{ melon["subtotal"]}} </td>
         </tr>
 
         {% endfor %}
@@ -33,9 +33,3 @@
     <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
 
 {% endblock %}
-<!--         self.melon_type = melon_type
-        self.common_name = common_name
-        self.price = price
-        self.image_url = image_url
-        self.color = color
-        self.seedless = seedless -->
